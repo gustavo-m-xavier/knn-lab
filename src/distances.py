@@ -24,14 +24,14 @@ def manhattan_distance(x, y):
     """
     return np.sum(np.abs(x - y))
 
-def minkowski_distance(x, y, p):
+def minkowski_distance(x, y, p=3):
     """
     Calcula a distância de Minkowski entre dois vetores x e y.
 
     params:
         x: array, vetor de características
         y: array, vetor de características
-        p: int, ordem da distância de Minkowski
+        p: int, ordem da distância de Minkowski, valor padrão é 3
     returns:
         float, a distância de Minkowski entre x e y
     """
