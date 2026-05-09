@@ -22,8 +22,4 @@ python3 -m venv .venv
 pip install -r requirements.txt
 ```
 
-Após isso, é preciso rodar o notebook jupyter:
-
-```cmd
-jupyter notebook
-```
+Baixe as extensões do nootebok jupyter para ter uma boa experiência no desenvolvimento e visutalização dos notebooks que estão na pasta `/notebooks`
