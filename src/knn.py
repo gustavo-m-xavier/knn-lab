@@ -1,58 +1,59 @@
 from collections import Counter
+from typing import Any, Callable
 import numpy as np
+from numpy.typing import NDArray
+
 
 class KNN:
     """
     Classe de implementação do algoritmo K-Nearest Neighbors (KNN)
     """
-    def __init__(self, k=3, distance_function=None):
+
+    def __init__(self, distance_formula: Callable[[NDArray, NDArray], Any], neighbors=3):
         """
         Inicializa o classificador KNN.
 
         params:
-            k: int, número de vizinhos mais próximos
-            distance_function: função, função de distância a ser utilizada
-        returns:
-            None
+            distance_formula (Callable[[Any, Any], Any]): função de distância a ser utilizada
+            neighbors (int): número de vizinhos mais próximos
         """
-        self.k = k
-        self.distance_function = distance_function
+        self.k = neighbors
+        self.distance_formula = distance_formula
 
-    def fit(self, X, y):
+    def fit(self, samples: NDArray, labels: NDArray):
         """
         Treina o classificador KNN.
 
         params:
-            X: array, conjunto de dados de treinamento
-            y: array, rótulos de treinamento
-        returns:
-            None
+            samples: array, conjunto de dados de treinamento
+            labels: array, rótulos de treinamento
         """
-        self.X_train = X
-        self.y_train = y
+        self.samples = samples
+        self.labels = labels
 
-    def predict(self, X):
+    def predict(self, test_samples: NDArray) -> list:
         """
         Faz previsões para os dados de teste.
 
         params:
-            X: array, conjunto de dados de teste
+            test_samples (NDArray): conjunto de dados de teste
         returns:
-            list, rótulos previstos
+            list: rótulos previstos
         """
         predictions = []
 
-        for sample in X:
+        for sample in test_samples:
             distances = []
 
-            for x_train in self.X_train:
-                distance = self.distance_function(sample, x_train)
+            for x_train in self.samples:
+                distance = self.distance_formula(sample, x_train)
+
                 distances.append(distance)
 
-            k_indices = np.argsort(distances)[:self.k]
-            k_labels = [self.y_train[i] for i in k_indices]
-
+            k_indexes = np.argsort(distances)[:self.k]
+            k_labels = [self.labels[i] for i in k_indexes]
             most_common = Counter(k_labels).most_common(1)
+
             predictions.append(most_common[0][0])
 
         return predictions
