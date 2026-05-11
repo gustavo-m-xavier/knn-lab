@@ -1,8 +1,9 @@
 import numpy as np
+from numpy.typing import NDArray
 
 
-def accuracy(true_labels, predicted_labels):
+def knn_accuracy(expected_feats: NDArray, predicted_feats: list):
     """
-    Calcula a acurácia entre os rótulos verdadeiros e os rótulos previstos.
+    Calcula a acurácia entre os atributos verdadeiros e os atributos previstos.
     """
-    return np.sum(true_labels == predicted_labels) / len(true_labels)
+    return np.sum(expected_feats == predicted_feats) / len(expected_feats)
