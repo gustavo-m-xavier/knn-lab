@@ -40,3 +40,24 @@ def minkowski_distance(x: NDArray, y: NDArray, order: int = 3):
         float, a distância de Minkowski entre x e y
     """
     return np.sum(np.abs(x - y) ** order) ** (1 / order)
+
+
+def hamming_distance(x: NDArray, y: NDArray):
+    """
+    Calcula a distância de Hamming entre dois vetores x e y.
+
+    A distância de Hamming representa a proporção de elementos
+    diferentes entre os dois vetores.
+
+    params:
+        x: array, vetor de características
+        y: array, vetor de características
+
+    returns:
+        float, a distância de Hamming entre x e y
+    """
+
+    if len(x) != len(y):
+        raise ValueError("Os vetores precisam ter o mesmo tamanho.")
+
+    return np.sum(x != y) / len(x)
