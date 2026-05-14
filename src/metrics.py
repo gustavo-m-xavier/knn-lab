@@ -25,8 +25,7 @@ def knn_compare(samples: NDArray, expected: NDArray, predicted: list) -> pd.Data
         data.append({
             'Ponto': str(samples[i]),
             'Atributo Esperado': expected[i],
-            'Atributo Previsto': predicted[i],
-            'Precisão': knn_accuracy(expected, predicted)
+            'Atributo Previsto': predicted[i]
         })
 
     return pd.DataFrame(data)
